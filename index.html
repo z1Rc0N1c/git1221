@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 24px 48px;
+            font-size: 48px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 24px;
+            border-radius: 5px;
+            margin-right: 24px;
+        }
+
+        .team-exists {
+            background-color: #4CAF50;
+        }
+
+        .team-not-exists {
+            background-color: grey;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 52px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 32px;
+        }
+
+        body {
+            background-color: aliceblue;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>우리 팀을 소개합니다!</h1>
+    <p>제출을 완료한 팀은 초록색으로 표시됩니다.</p>
+    <div class="button-container">
+        <script>
+            for (let i = 1; i <= 20; i++) {
+                const folderName = `team${i}`;
+                const button = document.createElement('button');
+                button.textContent = `${i}조`;
+                button.addEventListener('click', () => {
+                    window.location.href = `${folderName}/index.html`;
+                });
+
+                const xhr = new XMLHttpRequest();
+                xhr.open('HEAD', `${folderName}/index.html`, false);
+                xhr.send();
+                if (xhr.status === 200) {
+                    button.classList.add('team-exists');
+                } else {
+                    button.classList.add('team-not-exists');
+                }
+
+                document.body.appendChild(button);
+            }
+        </script>
+    </div>
+</body>
+</html>
